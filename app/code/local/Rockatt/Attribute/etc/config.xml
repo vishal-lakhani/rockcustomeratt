@@ -1,0 +1,144 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category   Manage Customer Attribute
+ * @package    Rockatt_Attribute
+ * @copyright  Copyright (c) 2016 Rocktechnolabs (http://www.rocktechnolabs.com)
+ * @author     Vishal Lakhani <vishal.lakhani@yahoo.co.in>
+ */
+-->
+<config>
+	<modules>
+		<Rockatt_Attribute>
+			<version>0.1.5</version>
+		</Rockatt_Attribute>
+	</modules>
+	<frontend>
+		<routers>
+            <customer>
+                <args>
+                    <modules>
+                        <rockatt_attribute before="Mage_Customer">Rockatt_Attribute</rockatt_attribute>
+                    </modules>
+                </args>
+            </customer>
+			<checkout>
+				<args>
+					<modules>
+						<rockatt_attribute before="Mage_Checkout">Rockatt_Attribute</rockatt_attribute>
+					</modules>
+				</args>
+			</checkout>
+        </routers>
+		<layout>
+			<updates>
+				<rockatt_customeratt>
+					<file>rockatt_customeratt.xml</file>
+				</rockatt_customeratt>
+			</updates>
+		</layout>
+		<events>
+            <checkout_onepage_controller_success_action>
+                <observers>
+                    <save_billing_info>
+                        <class>Rockatt_Attribute_Model_Savebillinginfo</class>
+                        <method>saveBillingInfo</method>
+                    </save_billing_info>
+                </observers>
+            </checkout_onepage_controller_success_action>			
+		</events>
+	</frontend>
+	<global>
+		<helpers>
+			<attribute>
+				<class>Rockatt_Attribute_Helper</class>
+			</attribute>
+		</helpers>
+		<blocks>
+			<attribute>
+				<class>Rockatt_Attribute_Block</class>
+			</attribute>
+			<adminhtml>
+				<rewrite>
+					<sales_order_grid>Rockatt_Attribute_Block_Adminhtml_Order_Grid</sales_order_grid>
+				</rewrite>
+			</adminhtml>
+			<adminhtml>
+				<rewrite>
+					<customer_grid>Rockatt_Attribute_Block_Adminhtml_Customer_Grid</customer_grid>
+				</rewrite>
+			</adminhtml>
+			
+		</blocks>
+		<models>
+			<attribute>
+				<class>Rockatt_Attribute_Model</class>
+				<resourceModel>attribute_mysql4</resourceModel>
+			</attribute>
+			<attribute_mysql4>
+				<class>Rockatt_Attribute_Model_Mysql4</class>
+				<entities>
+					<attribute>
+						<table>attribute</table>
+					</attribute>
+				</entities>
+			</attribute_mysql4>
+		</models>
+		<resources>
+			<attribute_setup>
+				<setup>
+					<module>Rockatt_Attribute</module>
+				</setup>
+				<connection>
+					<use>core_setup</use>
+				</connection>
+			</attribute_setup>
+			<attribute_write>
+				<connection>
+					<use>core_write</use>
+				</connection>
+			</attribute_write>
+			<attribute_read>
+				<connection>
+					<use>core_read</use>
+				</connection>
+			</attribute_read>
+		</resources>
+	</global>
+	<admin>
+		<routers>
+			<adminhtml>
+				<args>
+					<modules>
+						<Rockatt_Attribute before="Mage_Adminhtml">Rockatt_Attribute_Adminhtml</Rockatt_Attribute>
+					</modules>
+				</args>
+			</adminhtml>
+		</routers>
+	</admin>
+	<adminhtml>
+		<layout>
+			<updates>
+				<attribute>
+					<file>attribute.xml</file>
+				</attribute>
+			</updates>
+		</layout>
+		<events>
+			<core_block_abstract_prepare_layout_before>
+				<observers>
+					<customgrid_column_append>
+						<type>model</type>
+						<class>Rockatt_Attribute_Model_Customergrid</class>
+						<method>appendCustomerColumn</method>
+					</customgrid_column_append>
+					<ordergrid_column_append>
+						<type>model</type>
+						<class>Rockatt_Attribute_Model_Ordergrid</class>
+						<method>appendOrderColumn</method>
+					</ordergrid_column_append>
+				</observers>
+			</core_block_abstract_prepare_layout_before>
+		</events>
+	</adminhtml>
+</config>

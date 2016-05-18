@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category   Manage Customer Attribute
+ * @package    Rockatt_Attribute
+ * @copyright  Copyright (c) 2016 Rocktechnolabs (http://www.rocktechnolabs.com)
+ * @author     Vishal Lakhani <vishal.lakhani@yahoo.co.in>
+ */
+-->
+<config>
+	<menu>
+		<customer>
+			<children>
+				<attribute translate="title" module="attribute">
+					<sort_order>10</sort_order>
+					<title>Manage Customer Attribute</title>
+					<action>adminhtml/attribute</action>
+				</attribute>
+			</children>
+		</customer>
+	</menu>
+</config>

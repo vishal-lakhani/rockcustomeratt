@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category   Manage Customer Attribute
+ * @package    Rockatt_Attribute
+ * @copyright  Copyright (c) 2016 Rocktechnolabs (http://www.rocktechnolabs.com)
+ * @author     Vishal Lakhani <vishal.lakhani@yahoo.co.in>
+ */
+-->
+<config>
+	<modules>
+		<Rockatt_Attribute>
+			<active>true</active>
+			<codePool>local</codePool>
+		</Rockatt_Attribute>
+	</modules>
+</config>
